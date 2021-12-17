@@ -1,0 +1,173 @@
+GET http://localhost:8080/measurement?to=1621586866&from=1618987666
+
+###
+
+GET http://localhost:8080/measurement?to=1621586866&from=1618987666&sensor=1
+
+###
+
+POST http://localhost:8080/measurement/add-measurement?sensorId=1
+Content-Type: application/json
+
+{
+  "measurementKey" : {
+  "timestamp": 1621586866,
+    "sensor" : null
+  },
+  "value" : 231
+}
+
+###
+
+GET http://localhost:8080/actor
+
+###
+
+GET http://localhost:8080/location?id=1
+
+###
+
+GET http://localhost:8080/thing?id=1
+
+###
+
+POST http://localhost:8080/unit
+Content-Type: application/json
+
+{
+  "id": 1,
+  "symbol": "test"
+}
+###
+
+GET http://localhost:8080/actoraction?id=1
+
+###
+
+POST http://localhost:8080/actoraction?id=1
+Content-Type: application/json
+
+{
+  "actorActionKey" : {
+    "timestamp": 1632819328,
+    "actor" : null
+  },
+  "value" : 231.00
+}
+
+
+### Location getById
+GET http://localhost:8080/location?id=1
+
+### Location save
+POST http://localhost:8080/location
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "name" : "test"
+}
+
+### Unit getById
+GET http://localhost:8080/unit?id=1
+
+### Location save
+POST http://localhost:8080/unit
+Content-Type: application/json
+
+{
+  "id" : 2,
+  "symbol" : "uwu"
+}
+
+### actortype getById
+GET http://localhost:8080/actortype?id=3
+
+### actortype save
+POST http://localhost:8080/actortype
+Content-Type: application/json
+
+{
+  "id" : 0,
+  "name" : "idk"
+}
+
+
+### thing getById
+GET http://localhost:8080/thing?id=8
+
+### thing save
+POST http://localhost:8080/thing
+Content-Type: application/json
+
+{
+  "id" : 10,
+  "name" : "yes"
+}
+
+### sensortype getById
+GET http://localhost:8080/sensortype?id=10
+
+### sensortype save
+POST http://localhost:8080/sensortype
+Content-Type: application/json
+
+{
+  "id" : 10,
+  "name" : "sensortype test"
+}
+
+### actor getById
+GET http://localhost:8080/actor?id=1
+
+### actor save
+POST http://localhost:8080/actor
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "value" : 10
+}
+
+### sensor getById
+GET http://localhost:8080/sensor?id=1
+
+### sensor save
+POST http://localhost:8080/sensor
+Content-Type: application/json
+
+{
+  "id" : 11
+}
+
+### actoraction getById
+GET http://localhost:8080/actoraction?timestamp=984361
+
+### acntoraction save
+POST http://localhost:8080/actoraction?actorId=1
+Content-Type: application/json
+
+{
+  "actorActionKey" : {
+    "timestamp": 984361,
+    "actor" : null
+  },
+  "value" : 321
+}
+
+
+
+### measurement geById
+GET http://localhost:8080/measurement?timestamp=1615218639
+
+### acntoraction save
+POST http://localhost:8080/measurement?sensorId=1
+Content-Type: application/json
+
+{
+  "measurementKey" : {
+    "timestamp": 984361,
+    "sensor" : null
+  },
+  "value" : 321
+}
