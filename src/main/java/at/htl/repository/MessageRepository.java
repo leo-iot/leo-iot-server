@@ -1,6 +1,7 @@
 package at.htl.repository;
 
 import at.htl.entity.*;
+import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -38,11 +39,10 @@ public class MessageRepository {
     @Inject
     ActorActionRepository actorActionRepository;
 
-    @Transactional
-    public void processingMessage(String topic) {
+    public void processingMessage(String topic, String message) {
         JsonObject object = JsonbBuilder
                 .create()
-                .fromJson(new String("message.getPayload()"), JsonObject.class);
+                .fromJson(message, JsonObject.class);
 
         var pathSegments = topic.split("/");
         String deviceString = pathSegments[pathSegments.length - 2];
