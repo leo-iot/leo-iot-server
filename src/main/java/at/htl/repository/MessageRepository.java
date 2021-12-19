@@ -1,7 +1,6 @@
 package at.htl.repository;
 
 import at.htl.entity.*;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -40,10 +39,10 @@ public class MessageRepository {
     ActorActionRepository actorActionRepository;
 
     @Transactional
-    public void processingMessage(String topic, MqttMessage message) {
+    public void processingMessage(String topic) {
         JsonObject object = JsonbBuilder
                 .create()
-                .fromJson(new String(message.getPayload()), JsonObject.class);
+                .fromJson(new String("message.getPayload()"), JsonObject.class);
 
         var pathSegments = topic.split("/");
         String deviceString = pathSegments[pathSegments.length - 2];

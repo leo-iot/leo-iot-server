@@ -12,9 +12,6 @@ public class InitBean {
     @Inject
     EntityManager em;
 
-    @Inject
-    MqttController controller;
-
     @Transactional
     void onStart(@Observes StartupEvent ev) { }
 }
