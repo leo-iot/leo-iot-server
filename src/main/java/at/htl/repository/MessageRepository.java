@@ -50,7 +50,7 @@ public class MessageRepository {
         String[] locationStrings = Arrays
                 .stream(pathSegments)
                 .limit(pathSegments.length - 3)
-                .collect(Collectors.toList())
+                .toList()
                 .toArray(new String[pathSegments.length - 3]);
         double value = object.getJsonNumber("value").doubleValue();
         // * 1000 for converting seconds to milliseconds
