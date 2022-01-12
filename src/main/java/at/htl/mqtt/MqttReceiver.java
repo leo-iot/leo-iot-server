@@ -28,19 +28,9 @@ public class MqttReceiver {
     @Blocking
     @Transactional
     public CompletionStage<Void> process(MqttMessage<byte[]> message) {
-        System.out.println("processing");
         try {
             String messageContent = new String(message.getPayload());
             messageRepository.processingMessage(message.getTopic(), messageContent);
-
-            final var count = measurementRepository
-                    .listAll()
-                    .stream()
-                    .map(Measurement::getValue)
-                    .peek(meass -> System.out.println("meassurement: " + meass))
-                    .count();
-
-            System.out.println(count);
         } catch (BlockingOperationNotAllowedException exception) {
             exception.printStackTrace();
         }
