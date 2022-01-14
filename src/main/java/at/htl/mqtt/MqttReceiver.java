@@ -24,7 +24,7 @@ public class MqttReceiver {
     @Inject
     MeasurementRepository measurementRepository;
 
-    @Incoming("sensor_data")
+    @Incoming("sensordata")
     @Blocking
     @Transactional
     public CompletionStage<Void> process(MqttMessage<byte[]> message) {
