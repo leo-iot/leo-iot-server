@@ -1,7 +1,7 @@
 package at.htl.repository;
 
 import at.htl.entity.*;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -39,11 +39,10 @@ public class MessageRepository {
     @Inject
     ActorActionRepository actorActionRepository;
 
-    @Transactional
-    public void processingMessage(String topic, MqttMessage message) {
+    public void processingMessage(String topic, String message) {
         JsonObject object = JsonbBuilder
                 .create()
-                .fromJson(new String(message.getPayload()), JsonObject.class);
+                .fromJson(message, JsonObject.class);
 
         var pathSegments = topic.split("/");
         String deviceString = pathSegments[pathSegments.length - 2];
@@ -51,7 +50,7 @@ public class MessageRepository {
         String[] locationStrings = Arrays
                 .stream(pathSegments)
                 .limit(pathSegments.length - 3)
-                .collect(Collectors.toList())
+                .toList()
                 .toArray(new String[pathSegments.length - 3]);
         double value = object.getJsonNumber("value").doubleValue();
         // * 1000 for converting seconds to milliseconds
