@@ -18,34 +18,19 @@ import java.util.Objects;
 public class ActorAction{
 
     @EmbeddedId
-    private ActorActionKey actorActionKey;
-    @JsonbProperty("actor_action_value")
+    public ActorActionKey actorActionKey;
+
     @Schema(required = true)
-    private double value;
+    public double value;
 
     public ActorAction (ActorActionKey actorActionKey, double value){
+        this();
         this.actorActionKey = actorActionKey;
         this.value = value;
     }
 
     public ActorAction (){
 
-    }
-
-    public ActorActionKey getActorActionKey() {
-        return actorActionKey;
-    }
-
-    public void setActorActionKey(ActorActionKey actorActionKey) {
-        this.actorActionKey = actorActionKey;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
     }
 
     @Override
@@ -59,7 +44,7 @@ public class ActorAction{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ActorAction)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ActorAction that = (ActorAction) o;
         return Double.compare(that.value, value) == 0 && Objects.equals(actorActionKey, that.actorActionKey);
     }
@@ -70,35 +55,29 @@ public class ActorAction{
     }
 
     @Embeddable
-     public static class ActorActionKey implements Serializable {
-        private Timestamp timestamp;
+    public static class ActorActionKey implements Serializable {
+
+        public Timestamp timestamp;
+
         @ManyToOne
-        private Actor actor;
+        public Actor actor;
 
         public ActorActionKey(){
 
         }
 
         public ActorActionKey(Timestamp timestamp, Actor actor){
+            this();
             this.timestamp = timestamp;
             this.actor = actor;
-
         }
 
-        public Timestamp getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Timestamp timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public Actor getActor() {
-            return actor;
-        }
-
-        public void setActor(Actor actor) {
-            this.actor = actor;
+        @Override
+        public String toString() {
+            return "ActorActionKey{" +
+                    "timestamp=" + timestamp +
+                    ", actor=" + actor +
+                    '}';
         }
 
         @Override
@@ -112,14 +91,6 @@ public class ActorAction{
         @Override
         public int hashCode() {
             return Objects.hash(timestamp, actor);
-        }
-
-        @Override
-        public String toString() {
-            return "ActorActionKey{" +
-                    "timestamp=" + timestamp +
-                    ", actor=" + actor +
-                    '}';
         }
     }
 

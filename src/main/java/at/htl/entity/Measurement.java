@@ -20,7 +20,7 @@ public class Measurement {
 
     @EmbeddedId
     private MeasurementKey measurementKey;
-    @JsonbProperty("measurement_value")
+
     @Schema(required = true)
     private double value;
 
@@ -29,32 +29,9 @@ public class Measurement {
     }
 
     public Measurement(MeasurementKey measurementKey, double value){
+        this();
         this.measurementKey = measurementKey;
         this.value = value;
-    }
-
-    public MeasurementKey getMeasurementKey() {
-        return measurementKey;
-    }
-
-    public void setMeasurementKey(MeasurementKey measurementKey) {
-        this.measurementKey = measurementKey;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Measurement)) return false;
-        Measurement that = (Measurement) o;
-        return Double.compare(that.value, value) == 0 && Objects.equals(measurementKey, that.measurementKey);
     }
 
     @Override
@@ -66,38 +43,31 @@ public class Measurement {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Measurement that = (Measurement) o;
+        return Double.compare(that.value, value) == 0 && Objects.equals(measurementKey, that.measurementKey);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(measurementKey, value);
     }
 
     @Embeddable
     public static class MeasurementKey implements Serializable{
-        private Timestamp timestamp;
+
+        public Timestamp timestamp;
+
         @ManyToOne
-        private Sensor sensor;
+        public Sensor sensor;
 
-        public MeasurementKey(){
+        public MeasurementKey() { }
 
-        }
-
-        public MeasurementKey(Timestamp timestamp, Sensor sensor){
+        public MeasurementKey(Timestamp timestamp, Sensor sensor) {
+            this();
             this.timestamp = timestamp;
-            this.sensor = sensor;
-        }
-
-        public Timestamp getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Timestamp timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public Sensor getSensor() {
-            return sensor;
-        }
-
-        public void setSensor(Sensor sensor) {
             this.sensor = sensor;
         }
 
@@ -122,5 +92,4 @@ public class Measurement {
             return Objects.hash(timestamp, sensor);
         }
     }
-
 }

@@ -12,49 +12,27 @@ public class ActorType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @JsonbProperty("actortype_name")
-    private String name;
+    public String name;
 
     @ManyToOne
-    private Unit unit;
+    public Unit unit;
 
     public ActorType() {
     }
 
     public ActorType(String name, Unit unit) {
+        this();
         this.name = name;
         this.unit = unit;
     }
 
     public ActorType(Long id, String name, Unit unit) {
+        this(name, unit);
         this.id = id;
         this.name = name;
-        this.unit = unit;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
@@ -70,7 +48,7 @@ public class ActorType {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ActorType)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ActorType actorType = (ActorType) o;
         return Objects.equals(id, actorType.id) && Objects.equals(name, actorType.name) && Objects.equals(unit, actorType.unit);
     }

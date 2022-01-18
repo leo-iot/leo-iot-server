@@ -71,7 +71,7 @@ public class MessageRepository {
             ));
         } else if (actorType.isPresent()) {
             var actor = actorRepository.getOrCreateActorByTree(actorType.get(), thing, value);
-            actor.setValue(value);
+            actor.value = value;
             actorActionRepository.save(processActorAction(
                     actor,
                     timeStamp,

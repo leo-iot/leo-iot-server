@@ -15,32 +15,25 @@ public class Thing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @ManyToOne
-    private Location location;
+    public Location location;
 
     @JsonbTransient
     @OneToMany(mappedBy = "thing")
-    private List<Actor> actorList;
+    public List<Actor> actorList;
 
     @JsonbTransient
     @OneToMany(mappedBy = "thing")
-    private List<Sensor> sensorList;
+    public List<Sensor> sensorList;
 
     @JsonbProperty("thing_name")
-    private String name;
+    public String name;
 
     public Thing(){
         this.actorList = new LinkedList<>();
         this.sensorList = new LinkedList<>();
-    }
-
-    public Thing(Long id, Location location, String name) {
-        this();
-        this.id = id;
-        this.location = location;
-        this.name = name;
     }
 
     public Thing(Location location, String name) {
@@ -49,44 +42,9 @@ public class Thing {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Thing(Long id, Location location, String name) {
+        this(location, name);
         this.id = id;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Actor> getActorList() {
-        return actorList;
-    }
-
-    public void setActorList(List<Actor> actorList) {
-        this.actorList = actorList;
-    }
-
-    public List<Sensor> getSensorList() {
-        return sensorList;
-    }
-
-    public void setSensorList(List<Sensor> sensorList) {
-        this.sensorList = sensorList;
     }
 
     @Override
@@ -103,7 +61,7 @@ public class Thing {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Thing)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Thing thing = (Thing) o;
         return Objects.equals(id, thing.id) && Objects.equals(location, thing.location) && Objects.equals(actorList, thing.actorList) && Objects.equals(sensorList, thing.sensorList) && Objects.equals(name, thing.name);
     }
