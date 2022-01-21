@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Schema (description = "contains the actortype of the active actor ")
-public class ActorType {
+public class ActorType extends DataBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,27 +34,5 @@ public class ActorType {
         this.id = id;
         this.name = name;
         this.unit = unit;
-    }
-
-    @Override
-    public String toString() {
-        return "ActorType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", unit=" + unit +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActorType actorType = (ActorType) o;
-        return Objects.equals(id, actorType.id) && Objects.equals(name, actorType.name) && Objects.equals(unit, actorType.unit);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, unit);
     }
 }

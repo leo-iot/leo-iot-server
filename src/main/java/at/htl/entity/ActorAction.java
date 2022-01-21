@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains the value of the active actoraction")
-public class ActorAction{
+public class ActorAction extends DataBaseEntity {
 
     @EmbeddedId
     public ActorActionKey actorActionKey;
@@ -31,27 +31,6 @@ public class ActorAction{
 
     public ActorAction (){
 
-    }
-
-    @Override
-    public String toString() {
-        return "ActorAction{" +
-                "actorActionKey=" + actorActionKey +
-                ", value=" + value +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActorAction that = (ActorAction) o;
-        return Double.compare(that.value, value) == 0 && Objects.equals(actorActionKey, that.actorActionKey);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(actorActionKey, value);
     }
 
     @Embeddable
@@ -71,29 +50,6 @@ public class ActorAction{
             this.timestamp = timestamp;
             this.actor = actor;
         }
-
-        @Override
-        public String toString() {
-            return "ActorActionKey{" +
-                    "timestamp=" + timestamp +
-                    ", actor=" + actor +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ActorActionKey that = (ActorActionKey) o;
-            return Objects.equals(timestamp, that.timestamp) && Objects.equals(actor, that.actor);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(timestamp, actor);
-        }
     }
-
-
 }
 

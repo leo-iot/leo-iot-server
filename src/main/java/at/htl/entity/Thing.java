@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains a list of actors and sensors of the  thing ")
-public class Thing {
+public class Thing extends DataBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,29 +45,5 @@ public class Thing {
     public Thing(Long id, Location location, String name) {
         this(location, name);
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Thing{" +
-                "id=" + id +
-                ", location=" + location +
-                ", actorList=" + actorList +
-                ", sensorList=" + sensorList +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Thing thing = (Thing) o;
-        return Objects.equals(id, thing.id) && Objects.equals(location, thing.location) && Objects.equals(actorList, thing.actorList) && Objects.equals(sensorList, thing.sensorList) && Objects.equals(name, thing.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, location, actorList, sensorList, name);
     }
 }

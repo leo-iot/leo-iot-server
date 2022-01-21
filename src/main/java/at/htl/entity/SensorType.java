@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains the sensortype of ta sensor")
-public class SensorType {
+public class SensorType extends DataBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,27 +30,5 @@ public class SensorType {
     public SensorType(Long id, String name, Unit unit) {
         this(name, unit);
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "SensorType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", unit=" + unit +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SensorType that = (SensorType) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(unit, that.unit);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, unit);
     }
 }

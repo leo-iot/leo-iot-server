@@ -34,12 +34,12 @@ public class MeasurementResource {
     )
     public Response addMeasurement(@QueryParam("sensorId") Long sensorId ,JsonObject jsonObject){
         Measurement measurement = new Measurement();
-        measurement.setValue(jsonObject.getInt("value"));
+        measurement.value = jsonObject.getInt("value");
         Measurement.MeasurementKey measurementKey =
                 new Measurement.MeasurementKey(new Timestamp(jsonObject.getJsonObject("measurementKey").getInt("timestamp") * 1000),new Sensor());
 
-        measurementKey.setSensor(sensorRepository.findById(sensorId));
-        measurement.setMeasurementKey(measurementKey);
+        measurementKey.sensor = sensorRepository.findById(sensorId);
+        measurement.measurementKey = (measurementKey);
         return Response.accepted(measurementRepository.save(measurement)).build();
     }
 

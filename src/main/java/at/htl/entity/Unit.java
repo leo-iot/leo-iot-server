@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains the unit type/symbol of the sensortype")
-public class Unit {
+public class Unit extends DataBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,29 +43,6 @@ public class Unit {
     public Unit(Long id, String symbol) {
         this(symbol);
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Unit{" +
-                "id=" + id +
-                ", symbol='" + symbol + '\'' +
-                ", sensorTypeList=" + sensorTypeList +
-                ", actorTypeList=" + actorTypeList +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Unit unit = (Unit) o;
-        return Objects.equals(id, unit.id) && Objects.equals(symbol, unit.symbol) && Objects.equals(sensorTypeList, unit.sensorTypeList) && Objects.equals(actorTypeList, unit.actorTypeList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, symbol, sensorTypeList, actorTypeList);
     }
 }
 
