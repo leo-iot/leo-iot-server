@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @ApplicationScoped
-public class LocationRepository extends Repository<Location, Long> {
+public class LocationRepository implements Repository<Location, Long> {
 
     public Location getLocationByTree(String... locationStrings) {
         Location lastLocation = null;

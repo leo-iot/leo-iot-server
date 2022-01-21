@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class SensorRepository extends Repository<Sensor, Long> {
+public class SensorRepository implements Repository<Sensor, Long> {
 
     @Inject
     ThingRepository thingRepository;
