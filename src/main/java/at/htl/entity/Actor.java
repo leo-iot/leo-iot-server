@@ -23,7 +23,6 @@ public class Actor extends DataBaseEntity {
 
     public Actor() { }
 
-
     public Actor(Thing thing, ActorType actortype, double value) {
         this();
         this.thing = thing;
