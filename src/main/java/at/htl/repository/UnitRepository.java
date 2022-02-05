@@ -5,5 +5,5 @@ import at.htl.entity.Unit;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class UnitRepository extends Repository<Unit, Long> {
+public class UnitRepository implements Repository<Unit, Long> {
 }

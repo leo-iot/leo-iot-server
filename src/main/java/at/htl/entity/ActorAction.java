@@ -15,15 +15,16 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains the value of the active actoraction")
-public class ActorAction{
+public class ActorAction extends DataBaseEntity {
 
     @EmbeddedId
-    private ActorActionKey actorActionKey;
-    @JsonbProperty("actor_action_value")
+    public ActorActionKey actorActionKey;
+
     @Schema(required = true)
-    private double value;
+    public double value;
 
     public ActorAction (ActorActionKey actorActionKey, double value){
+        this();
         this.actorActionKey = actorActionKey;
         this.value = value;
     }
@@ -32,97 +33,23 @@ public class ActorAction{
 
     }
 
-    public ActorActionKey getActorActionKey() {
-        return actorActionKey;
-    }
-
-    public void setActorActionKey(ActorActionKey actorActionKey) {
-        this.actorActionKey = actorActionKey;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "ActorAction{" +
-                "actorActionKey=" + actorActionKey +
-                ", value=" + value +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ActorAction)) return false;
-        ActorAction that = (ActorAction) o;
-        return Double.compare(that.value, value) == 0 && Objects.equals(actorActionKey, that.actorActionKey);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(actorActionKey, value);
-    }
-
     @Embeddable
-     public static class ActorActionKey implements Serializable {
-        private Timestamp timestamp;
+    public static class ActorActionKey implements Serializable {
+
+        public Timestamp timestamp;
+
         @ManyToOne
-        private Actor actor;
+        public Actor actor;
 
         public ActorActionKey(){
 
         }
 
         public ActorActionKey(Timestamp timestamp, Actor actor){
+            this();
             this.timestamp = timestamp;
             this.actor = actor;
-
-        }
-
-        public Timestamp getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Timestamp timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public Actor getActor() {
-            return actor;
-        }
-
-        public void setActor(Actor actor) {
-            this.actor = actor;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ActorActionKey that = (ActorActionKey) o;
-            return Objects.equals(timestamp, that.timestamp) && Objects.equals(actor, that.actor);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(timestamp, actor);
-        }
-
-        @Override
-        public String toString() {
-            return "ActorActionKey{" +
-                    "timestamp=" + timestamp +
-                    ", actor=" + actor +
-                    '}';
         }
     }
-
-
 }
 

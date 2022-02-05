@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ThingRepository extends Repository<Thing, Long> {
+public class ThingRepository implements Repository<Thing, Long> {
 
     public Thing getOrCreateByTree(String name, Location location) {
         return getThingByNameAndLocation(name, location)

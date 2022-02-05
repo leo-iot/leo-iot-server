@@ -11,27 +11,24 @@ import java.util.Objects;
 
 @Entity
 @Schema(description = "contains a thingList and a location of the current location")
-public class Location {
+public class Location extends DataBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @ManyToOne
-    private Location location;
+    public Location location;
 
     @JsonbTransient
     @OneToMany(mappedBy = "location")
-    private List<Thing> thingList;
+    public List<Thing> thingList;
 
     @JsonbProperty("location_name")
-    private String name;
+    public String name;
 
-    public Location(Long id, Location location, String name) {
-        this();
-        this.id = id;
-        this.location = location;
-        this.name = name;
+    public Location() {
+        this.thingList = new LinkedList<>();
     }
 
     public Location(Location location, String name) {
@@ -40,61 +37,8 @@ public class Location {
         this.name = name;
     }
 
-    public Location() {
-        this.thingList = new LinkedList<>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Location(Long id, Location location, String name) {
+        this(location, name);
         this.id = id;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Thing> getThingList() {
-        return thingList;
-    }
-
-    public void setThingList(List<Thing> thingList) {
-        this.thingList = thingList;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", location=" + location +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Location)) return false;
-        Location location1 = (Location) o;
-        return Objects.equals(id, location1.id) && Objects.equals(location, location1.location) && Objects.equals(thingList, location1.thingList) && Objects.equals(name, location1.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, location, thingList, name);
     }
 }

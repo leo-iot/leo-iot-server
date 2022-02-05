@@ -6,7 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.Optional;
 
 @ApplicationScoped
-public class SensorTypeRepository extends Repository<SensorType, Long> {
+public class SensorTypeRepository implements Repository<SensorType, Long> {
     public SensorType getOrCreateByName(String name) {
         return getByName(name)
                 .orElseGet(() -> save(new SensorType(
