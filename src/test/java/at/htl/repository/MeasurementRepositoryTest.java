@@ -1,7 +1,8 @@
 package at.htl.repository;
 
-import at.htl.entity.Measurement;
-import at.htl.entity.Sensor;
+import at.htl.database.entity.Measurement;
+import at.htl.database.entity.Sensor;
+import at.htl.database.repository.MeasurementRepository;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

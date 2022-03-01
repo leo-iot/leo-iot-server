@@ -1,5 +1,6 @@
 package at.htl.repository;
 
+import at.htl.database.repository.Repository;
 import io.agroal.api.AgroalDataSource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.assertj.db.type.Table;
@@ -105,7 +106,7 @@ public class RepositoryTest {
 
     @Test
     public void testEntity_removeById_success() {
-        assertThat(repository.removeById(testEntity3.id))
+        assertThat(repository.deleteById(testEntity3.id))
                 .isTrue();
 
         table = new Table(dataSource, testEntityTableName);
@@ -119,7 +120,7 @@ public class RepositoryTest {
 
     @Test
     public void thing_removeById_fail() {
-        assertThat(repository.removeById(50L))
+        assertThat(repository.deleteById(50L))
                 .isFalse();
     }
 
@@ -147,4 +148,4 @@ class TestEntity {
 }
 
 @ApplicationScoped
-class TestEntityRepository extends Repository<TestEntity, Long> { }
+class TestEntityRepository implements Repository<TestEntity, Long> { }
