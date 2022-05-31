@@ -147,4 +147,4 @@ class TestEntity {
 }
 
 @ApplicationScoped
-class TestEntityRepository extends Repository<TestEntity, Long> { }
+class TestEntityRepository implements Repository<TestEntity, Long> { }
