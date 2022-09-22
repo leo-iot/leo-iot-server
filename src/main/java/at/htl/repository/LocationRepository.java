@@ -1,14 +1,28 @@
 package at.htl.repository;
 
 import at.htl.entity.Location;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @ApplicationScoped
-public class LocationRepository implements Repository<Location, Long> {
+public class LocationRepository implements PanacheRepository<Location> {
+
+    public Location add(String name, Long locationId){
+        System.out.println(locationId);
+        Location parentLocation = null;
+        if(locationId != null) {
+            parentLocation = findById(locationId);
+        }
+        Location l = new Location(parentLocation, name);
+        return save(l);
+    }
+
+    public Location save(Location entity) {
+        return getEntityManager().merge(entity);
+    }
 
     public Location getLocationByTree(String... locationStrings) {
         Location lastLocation = null;

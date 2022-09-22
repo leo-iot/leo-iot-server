@@ -1,12 +1,12 @@
 package at.htl.boundary;
 
-import at.htl.entity.Location;
-import at.htl.entity.Sensor;
+import at.htl.dto.AddLocationDto;
 import at.htl.repository.LocationRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,14 +37,15 @@ public class LocationResource {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    //@Consumes(MediaType.APPLICATION_JSON)
     @Operation(
             summary = "save a location",
             description = "save the desired location"
     )
-    public Response addLocation(Location location){
+    @Transactional
+    public Response addLocation(AddLocationDto locationDto){
         return Response
-                .accepted(locationRepository.save(location))
+                .accepted(locationRepository.add(locationDto.name, locationDto.parentLocationId))
                 .build();
     }
 
