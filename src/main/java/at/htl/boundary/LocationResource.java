@@ -1,6 +1,7 @@
 package at.htl.boundary;
 
 import at.htl.dto.AddLocationDto;
+import at.htl.entity.Location;
 import at.htl.repository.LocationRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -26,8 +27,12 @@ public class LocationResource {
     )
     public Response getLocation(@QueryParam("id") Long locationId){
         if (locationId != null){
+            Location l = locationRepository.findById(locationId);
+            if(l == null){
+                return Response.status(404).build();
+            }
             return Response
-                    .accepted(locationRepository.findById(locationId))
+                    .accepted(l)
                     .build();
         }else{
             return Response
@@ -54,6 +59,7 @@ public class LocationResource {
             summary =  "delete a location",
             description = "delete the desired location"
     )
+    @Transactional
     public Response deleteLocationById(@QueryParam("id") Long locationId){
         return Response
                 .accepted(locationRepository.deleteById(locationId))

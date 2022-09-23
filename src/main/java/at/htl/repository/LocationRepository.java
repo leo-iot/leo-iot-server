@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import java.util.Optional;
 
 @ApplicationScoped
-public class LocationRepository implements PanacheRepository<Location> {
+public class LocationRepository implements Repository<Location, Long> {
 
     public Location add(String name, Long locationId){
         System.out.println(locationId);
@@ -18,10 +18,6 @@ public class LocationRepository implements PanacheRepository<Location> {
         }
         Location l = new Location(parentLocation, name);
         return save(l);
-    }
-
-    public Location save(Location entity) {
-        return getEntityManager().merge(entity);
     }
 
     public Location getLocationByTree(String... locationStrings) {
