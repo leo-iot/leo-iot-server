@@ -1,5 +1,5 @@
-Feature: Location creation endpoint.
-  An user of the endpoint is able to create Location
+Feature: Location crud endpoints.
+  An user of the endpoints is able to create, update, get and delete Locations
 
   Background:
     * url baseUrl

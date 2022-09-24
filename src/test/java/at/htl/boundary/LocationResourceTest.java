@@ -7,7 +7,7 @@ import io.quarkus.test.junit.QuarkusTest;
 public class LocationResourceTest {
 
     @Karate.Test
-    Karate option_crud_in_productEndpointTest() {
+    Karate location_crud_EndpointTest() {
         return Karate.run("locations").relativeTo(getClass());
     }
 }
