@@ -7,6 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -42,6 +43,7 @@ public class ThingResource {
             summary = "save a thing",
             description = "save the desired thing"
     )
+    @Transactional
     public Response addThing(Thing thing){
         return Response
                 .accepted(thingRepository.save(thing))
@@ -53,6 +55,7 @@ public class ThingResource {
             summary = "delete a thing",
             description = "delte a thing by id"
     )
+    @Transactional
     public Response deleteThingById(@QueryParam("id") Long thingId){
         return Response
                 .accepted(thingRepository.deleteById(thingId))
