@@ -36,7 +36,7 @@ public class LocationResource {
                     .build();
         }else{
             return Response
-                    .accepted(locationRepository.findAll())
+                    .accepted(locationRepository.listAll())
                     .build();
         }
     }
