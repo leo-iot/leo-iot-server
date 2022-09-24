@@ -1,7 +1,6 @@
 package at.htl.repository;
 
 import at.htl.entity.Location;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.TypedQuery;
@@ -20,7 +19,7 @@ public class LocationRepository implements Repository<Location, Long> {
         return save(l);
     }
 
-    public Location update(Location location){
+    public Location updateLocation(Location location){
         Location l = findById(location.id);
         if(l == null){
             return null;

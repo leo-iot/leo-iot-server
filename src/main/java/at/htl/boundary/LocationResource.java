@@ -73,7 +73,7 @@ public class LocationResource {
     )
     @Transactional
     public Response updateLocation(Location location){
-        Location l = locationRepository.update(location);
+        Location l = locationRepository.updateLocation(location);
         if(l == null){
             return Response.status(404).build();
         }

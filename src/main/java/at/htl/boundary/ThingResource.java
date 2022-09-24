@@ -62,4 +62,19 @@ public class ThingResource {
                 .build();
     }
 
+    @PUT
+    @Operation(
+            summary = "update a location",
+            description = "update the desired location"
+    )
+    @Transactional
+    public Response updateThing(Thing thing){
+        Thing t = thingRepository.updateThing(thing);
+        if(t == null){
+            return Response.status(404).build();
+        }
+        return Response
+                .accepted(t)
+                .build();
+    }
 }
