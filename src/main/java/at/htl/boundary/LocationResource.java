@@ -66,4 +66,16 @@ public class LocationResource {
                 .build();
     }
 
+    @PUT
+    @Operation(
+            summary = "update a location",
+            description = "update the desired location"
+    )
+    @Transactional
+    public Response updateLocation(Location location){
+        return Response
+                .accepted(locationRepository.update(location))
+                .build();
+    }
+
 }

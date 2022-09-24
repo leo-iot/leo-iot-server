@@ -20,6 +20,13 @@ public class LocationRepository implements Repository<Location, Long> {
         return save(l);
     }
 
+    public Location update(Location location){
+        Location l = findById(location.id);
+        l.location = location.location;
+        l.name = location.name;
+        return l;
+    }
+
     public Location getLocationByTree(String... locationStrings) {
         Location lastLocation = null;
         Location location = null;
