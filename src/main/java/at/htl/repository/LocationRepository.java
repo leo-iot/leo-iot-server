@@ -22,6 +22,9 @@ public class LocationRepository implements Repository<Location, Long> {
 
     public Location update(Location location){
         Location l = findById(location.id);
+        if(l == null){
+            return null;
+        }
         l.location = location.location;
         l.name = location.name;
         return l;
