@@ -16,3 +16,14 @@ Feature: Thing crud endpoints.
     When method GET
     Then status 202
     And match response == {"id":1,"thing_name":"LeoBox1-e59"}
+
+  Scenario: Delete a Thing
+    Given path 'thing'
+    And param id = 1
+    When method DELETE
+    Then status 202
+
+    Given path 'thing'
+    And param id = 1
+    When method GET
+    Then status 404

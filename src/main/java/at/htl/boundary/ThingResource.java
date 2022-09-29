@@ -27,8 +27,12 @@ public class ThingResource {
     )
     public Response getThing(@QueryParam("id") Long thingId){
         if(thingId != null) {
+            Thing t = thingRepository.findById(thingId);
+            if(t == null){
+                return Response.status(404).build();
+            }
             return Response
-                    .accepted(thingRepository.findById(thingId))
+                    .accepted(t)
                     .build();
         }else {
             return  Response
