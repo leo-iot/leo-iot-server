@@ -4,6 +4,12 @@ Feature: Location crud endpoints.
   Background:
     * url baseUrl
 
+  Scenario: Get all Locations
+    Given path 'location'
+    When method GET
+    Then status 202
+    And match response == [{"id":1001,"location_name":"HTL Leonding"},{"id":1002,"location":{"id":1001,"location_name":"HTL Leonding"},"location_name":"eg"},{"id":1003,"location":{"id":1002,"location":{"id":1001,"location_name":"HTL Leonding"},"location_name":"eg"},"location_name":"e581"},{"id":1004,"location":{"id":1002,"location":{"id":1001,"location_name":"HTL Leonding"},"location_name":"eg"},"location_name":"e582"}]
+
   Scenario: Create a Location
     Given path 'location'
     And request { name: "Location1" }
