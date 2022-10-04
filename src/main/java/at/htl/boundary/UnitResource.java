@@ -29,7 +29,7 @@ public class UnitResource {
                     .build();
         }else {
             return Response
-                    .accepted(unitRepository.findAll())
+                    .accepted(unitRepository.listAll())
                     .build();
         }
     }
