@@ -36,7 +36,7 @@ public class ThingResource {
                     .build();
         }else {
             return  Response
-                    .accepted(thingRepository.findAll())
+                    .accepted(thingRepository.listAll())
                     .build();
         }
     }
