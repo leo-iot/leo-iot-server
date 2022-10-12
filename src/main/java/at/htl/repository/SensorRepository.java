@@ -38,4 +38,14 @@ public class SensorRepository implements Repository<Sensor, Long> {
                     sensorType
                 )));
     }
+
+    public Sensor updateSensor(Sensor sensor) {
+        Sensor s = findById(sensor.id);
+        if(s == null){
+            return null;
+        }
+        s.sensorType = sensor.sensorType;
+        s.thing = sensor.thing;
+        return s;
+    }
 }

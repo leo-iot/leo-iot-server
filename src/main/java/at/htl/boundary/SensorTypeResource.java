@@ -1,8 +1,6 @@
 package at.htl.boundary;
 
-import at.htl.entity.Location;
 import at.htl.entity.SensorType;
-import at.htl.entity.Unit;
 import at.htl.repository.SensorTypeRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;

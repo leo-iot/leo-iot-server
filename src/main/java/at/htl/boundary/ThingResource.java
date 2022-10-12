@@ -1,6 +1,5 @@
 package at.htl.boundary;
 
-import at.htl.entity.Location;
 import at.htl.entity.Thing;
 import at.htl.repository.ThingRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
