@@ -6,10 +6,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
-class UnitResourceTest {
+class SensorTypeResourceTest {
 
     @Karate.Test
-    Karate unit_crud_EndpointTest() {
-        return Karate.run("units").relativeTo(getClass());
+    Karate sensorTypes_crud_EndpointTest() {
+        return Karate.run("sensorTypes").relativeTo(getClass());
     }
 }

@@ -1,5 +1,5 @@
 Feature: Unit crud endpoints.
-  An user of the endpoints is able to create, update, get and delete Things
+  An user of the endpoints is able to create, update, get and delete Units
 
   Background:
     * url baseUrl
