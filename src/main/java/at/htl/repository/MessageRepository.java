@@ -39,6 +39,7 @@ public class MessageRepository {
     @Inject
     ActorActionRepository actorActionRepository;
 
+    @Transactional
     public void processingMessage(String topic, String message) {
         JsonObject object = JsonbBuilder
                 .create()
