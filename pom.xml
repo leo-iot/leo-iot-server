@@ -7,6 +7,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <graal-sdk.version>22.1.0.1</graal-sdk.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
@@ -16,7 +17,6 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.13.3.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <graal-sdk.version>22.1.0.1</graal-sdk.version>
   </properties>
   <dependencyManagement>
     <dependencies>
