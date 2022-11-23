@@ -9,6 +9,7 @@ import io.quarkus.runtime.BlockingOperationNotAllowedException;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.reactive.messaging.annotations.Blocking;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
@@ -28,6 +29,9 @@ public class MqttReceiver {
 
     @Inject
     MeasurementRepository measurementRepository;
+
+    @ConfigProperty(name = "leoiot.testing")
+    Boolean isTesting;
 
     /*https://github.com/smallrye/smallrye-reactive-messaging/issues/1945
     https://github.com/smallrye/smallrye-reactive-messaging/issues/1906
@@ -70,7 +74,8 @@ public class MqttReceiver {
     private void processMessage(MqttMessage<byte[]> message){
         try {
             String messageContent = new String(message.getPayload());
-            messageRepository.processingMessage(message.getTopic(), messageContent);
+            if(!isTesting)
+                messageRepository.processingMessage(message.getTopic(), messageContent);
         } catch (BlockingOperationNotAllowedException exception) {
             exception.printStackTrace();
         }
