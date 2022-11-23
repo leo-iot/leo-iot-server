@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @ApplicationScoped
-public class ActorActionRepository extends Repository<ActorAction, ActorAction.ActorActionKey> {
+public class ActorActionRepository implements Repository<ActorAction, ActorAction.ActorActionKey> {
 
     public List<ActorAction> getActorActionByTimestamp(Timestamp timestamp){
         var query = getEntityManager().createQuery(

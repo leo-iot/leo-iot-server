@@ -53,11 +53,11 @@ public class ActorActionResource {
     )
     public Response addActorAction(@QueryParam("actorId") Long actorId, JsonObject jsonObject){
         ActorAction actorAction = new ActorAction();
-        actorAction.setValue(jsonObject.getInt("value"));
+        actorAction.value = jsonObject.getInt("value");
         ActorAction.ActorActionKey actorActionKey =
                 new ActorAction.ActorActionKey(new Timestamp(jsonObject.getJsonObject("actorActionKey").getInt("timestamp")*1000), new Actor());
-        actorActionKey.setActor(actorRepository.findById(actorId));
-        actorAction.setActorActionKey(actorActionKey);
+        actorActionKey.actor = actorRepository.findById(actorId);
+        actorAction.actorActionKey = actorActionKey;
         return Response.accepted( actorActionRepository.save(actorAction)).build();
     }
 

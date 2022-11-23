@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ActorRepository extends Repository<Actor, Long> {
+public class ActorRepository implements Repository<Actor, Long> {
 
     public Actor getOrCreateActorByTree(ActorType actorType, Thing thing, double value) {
         var query = getEntityManager().createQuery(

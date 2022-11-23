@@ -9,7 +9,17 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ThingRepository extends Repository<Thing, Long> {
+public class ThingRepository implements Repository<Thing, Long> {
+
+    public Thing updateThing(Thing thing){
+        Thing t = findById(thing.id);
+        if(t == null){
+            return null;
+        }
+        t.location = thing.location;
+        t.name = thing.name;
+        return t;
+    }
 
     public Thing getOrCreateByTree(String name, Location location) {
         return getThingByNameAndLocation(name, location)

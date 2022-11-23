@@ -1,12 +1,12 @@
 package at.htl.boundary;
 
-import at.htl.entity.Location;
 import at.htl.entity.Thing;
 import at.htl.repository.ThingRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -26,12 +26,16 @@ public class ThingResource {
     )
     public Response getThing(@QueryParam("id") Long thingId){
         if(thingId != null) {
+            Thing t = thingRepository.findById(thingId);
+            if(t == null){
+                return Response.status(404).build();
+            }
             return Response
-                    .accepted(thingRepository.findById(thingId))
+                    .accepted(t)
                     .build();
         }else {
             return  Response
-                    .accepted(thingRepository.findAll())
+                    .accepted(thingRepository.listAll())
                     .build();
         }
     }
@@ -42,6 +46,7 @@ public class ThingResource {
             summary = "save a thing",
             description = "save the desired thing"
     )
+    @Transactional
     public Response addThing(Thing thing){
         return Response
                 .accepted(thingRepository.save(thing))
@@ -53,10 +58,26 @@ public class ThingResource {
             summary = "delete a thing",
             description = "delte a thing by id"
     )
+    @Transactional
     public Response deleteThingById(@QueryParam("id") Long thingId){
         return Response
                 .accepted(thingRepository.deleteById(thingId))
                 .build();
     }
 
+    @PUT
+    @Operation(
+            summary = "update a location",
+            description = "update the desired location"
+    )
+    @Transactional
+    public Response updateThing(Thing thing){
+        Thing t = thingRepository.updateThing(thing);
+        if(t == null){
+            return Response.status(404).build();
+        }
+        return Response
+                .accepted(t)
+                .build();
+    }
 }

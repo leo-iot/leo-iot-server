@@ -1,5 +1,6 @@
 package at.htl.repository;
 
+import at.htl.dto.MessageProcessingDto;
 import at.htl.entity.*;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 
@@ -39,23 +40,40 @@ public class MessageRepository {
     @Inject
     ActorActionRepository actorActionRepository;
 
+    public static MessageProcessingDto convertToMessageProcessingDto(String str){
+        str = str.replaceAll("}","");
+        str = str.replaceAll("\\{","");
+        var parts = str.split(",");
+        double val = 0;
+        long timestamp = 0;
+        if(parts[0].split(":")[0].equals("\"value\"")){
+            val = Double.parseDouble(parts[0].split(":")[1]);
+            timestamp = Long.parseLong(parts[1].split(":")[1]);
+        }
+        else{
+            val = Double.parseDouble(parts[1].split(":")[1]);
+            timestamp = Long.parseLong(parts[0].split(":")[1]);
+        }
+
+        return new MessageProcessingDto(timestamp, val);
+    }
+
+    @Transactional
     public void processingMessage(String topic, String message) {
-        JsonObject object = JsonbBuilder
-                .create()
-                .fromJson(message, JsonObject.class);
+        MessageProcessingDto mpObject = convertToMessageProcessingDto(message);
 
         var pathSegments = topic.split("/");
         String deviceString = pathSegments[pathSegments.length - 2];
         String thingString = pathSegments[pathSegments.length - 3];
         String[] locationStrings = Arrays
                 .stream(pathSegments)
-                .limit(pathSegments.length - 3)
+                .limit(pathSegments.length - 2)
                 .toList()
-                .toArray(new String[pathSegments.length - 3]);
-        double value = object.getJsonNumber("value").doubleValue();
+                .toArray(new String[pathSegments.length - 2]);
+        double value = mpObject.value();
         // * 1000 for converting seconds to milliseconds
 
-        var timeStamp = new Timestamp(object.getJsonNumber("timestamp").longValue() * 1000);
+        var timeStamp = new Timestamp(mpObject.timestamp() * 1000);
         var location = locationRepository.getLocationByTree(locationStrings);
         var thing = thingRepository.getOrCreateByTree(thingString, location);
 
@@ -71,7 +89,7 @@ public class MessageRepository {
             ));
         } else if (actorType.isPresent()) {
             var actor = actorRepository.getOrCreateActorByTree(actorType.get(), thing, value);
-            actor.setValue(value);
+            actor.value = value;
             actorActionRepository.save(processActorAction(
                     actor,
                     timeStamp,

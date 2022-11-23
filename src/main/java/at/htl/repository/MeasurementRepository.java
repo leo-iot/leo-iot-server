@@ -10,8 +10,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class MeasurementRepository
-        extends
-            Repository<Measurement, Measurement.MeasurementKey>
+        implements Repository<Measurement, Measurement.MeasurementKey>
 {
 
     @Inject

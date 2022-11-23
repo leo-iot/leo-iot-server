@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class SensorRepository extends Repository<Sensor, Long> {
+public class SensorRepository implements Repository<Sensor, Long> {
 
     @Inject
     ThingRepository thingRepository;
@@ -37,5 +37,15 @@ public class SensorRepository extends Repository<Sensor, Long> {
                     thing,
                     sensorType
                 )));
+    }
+
+    public Sensor updateSensor(Sensor sensor) {
+        Sensor s = findById(sensor.id);
+        if(s == null){
+            return null;
+        }
+        s.sensorType = sensor.sensorType;
+        s.thing = sensor.thing;
+        return s;
     }
 }
