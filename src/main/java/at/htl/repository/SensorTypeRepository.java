@@ -19,4 +19,14 @@ public class SensorTypeRepository implements Repository<SensorType, Long> {
         return find("name", name)
                 .firstResultOptional();
     }
+
+    public SensorType updateSensorType(SensorType sensorType) {
+        SensorType st = findById(sensorType.id);
+        if(st == null){
+            return null;
+        }
+        st.unit = sensorType.unit;
+        st.name = sensorType.name;
+        return st;
+    }
 }
