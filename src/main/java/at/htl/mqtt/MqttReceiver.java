@@ -35,19 +35,44 @@ public class MqttReceiver {
     https://github.com/smallrye/smallrye-reactive-messaging/issues/750
     https://gitter.im/smallrye-io/community?at=5f60d49589b38d09212cf7b5
     */
-    //TODO: will crash when to many sensors are active
+    //TODO: will crash when to many sensors are active at startup
+    // Current solution: multiple income channels, not 100% guaranteed that this will work
     // (there is no way to change it currently with this implementation)
     // See Links above
     @Incoming("sensordata")
     @Blocking
-    public CompletionStage<Void> process(MqttMessage<byte[]> message) {
+    public CompletionStage<Void> processEg(MqttMessage<byte[]> message) {
+        processMessage(message);
+        return message.ack();
+    }
+
+    @Incoming("sensordata_ug")
+    @Blocking
+    public CompletionStage<Void> processUg(MqttMessage<byte[]> message) {
+        processMessage(message);
+        return message.ack();
+    }
+
+    @Incoming("sensordata_og")
+    @Blocking
+    public CompletionStage<Void> processOg(MqttMessage<byte[]> message) {
+        processMessage(message);
+        return message.ack();
+    }
+
+    @Incoming("sensordata_og2")
+    @Blocking
+    public CompletionStage<Void> processOg2(MqttMessage<byte[]> message) {
+        processMessage(message);
+        return message.ack();
+    }
+
+    private void processMessage(MqttMessage<byte[]> message){
         try {
             String messageContent = new String(message.getPayload());
             messageRepository.processingMessage(message.getTopic(), messageContent);
         } catch (BlockingOperationNotAllowedException exception) {
             exception.printStackTrace();
         }
-
-        return message.ack();
     }
 }
