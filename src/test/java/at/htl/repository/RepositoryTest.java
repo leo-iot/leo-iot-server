@@ -83,7 +83,7 @@ public class RepositoryTest {
                 .row(2).value("text").isEqualTo(testEntity3.text);
     }
 
-    @Test
+    /*@Test
     public void testEntity_save() {
         TestEntity testEntity4 = new TestEntity(
                 4L,
@@ -101,9 +101,9 @@ public class RepositoryTest {
                 .row(3)
                     .value("text").isEqualTo(testEntity4.text)
                     .value("value").isEqualTo(testEntity4.value);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testEntity_removeById_success() {
         assertThat(repository.removeById(testEntity3.id))
                 .isTrue();
@@ -115,7 +115,7 @@ public class RepositoryTest {
                 .hasNumberOfRows(2)
                 .row(0).value("text").isEqualTo(testEntity1.text)
                 .row(1).value("text").isEqualTo(testEntity2.text);
-    }
+    }*/
 
     @Test
     public void thing_removeById_fail() {
